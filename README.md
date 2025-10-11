@@ -12,6 +12,20 @@ This repo is the app you run locally during development and deploy to static hos
 - TailwindCSS + design tokens (HSL variables and gradients)
 
 ## Quick start (development)
+# FinSight
+
+FinSight is a lightweight personal finance / lending UI built with Vite + React + TypeScript and the shadcn/ui design primitives. It provides expense tracking, lending management, and borrower detail views, and uses Supabase as the backend for data storage and auth.
+
+This repo is the app you run locally during development and deploy to static hosting when ready.
+
+## Features
+- Expense tracking
+- Lending / borrower detail pages
+- Responsive layout with a desktop sidebar and mobile bottom navigation
+- Supabase integration for persistence and auth
+- TailwindCSS + design tokens (HSL variables and gradients)
+
+## Quick start (development)
 1. Install dependencies
 
 ```bash
@@ -80,6 +94,45 @@ Notes:
 ## Deploying
 - Build static assets with `npm run build` and deploy the `dist` folder to any static host (Vercel, Netlify, Cloudflare Pages, etc.).
 - Ensure the runtime environment provides the same VITE_ env variables to the deployed site (Vite will replace `import.meta.env` at build-time).
+
+## Google Sign-in with Supabase
+
+This project includes a small `SignIn` component that triggers Supabase's OAuth flow for Google. To enable Google signin end-to-end, follow these steps:
+
+1. Enable Google provider in your Supabase project
+   - Open the Supabase dashboard for your project.
+   - Go to Settings -> Auth -> Providers.
+   - Enable Google and provide the OAuth Client ID and Client Secret from the Google Cloud Console.
+   - Set the Redirect URL(s) to your Vite app origin(s), for example:
+     - http://localhost:5173
+     - https://your-production-domain.com
+
+2. Update your `.env` (if needed) and ensure `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` are present.
+
+3. Use the built-in `SignIn` component
+   - The component is at `src/components/SignIn.tsx` and uses `supabase.auth.signInWithOAuth({ provider: 'google' })` to start the flow.
+   - Example usage (place it on a page or in the header):
+
+```tsx
+import SignIn from '@/components/SignIn';
+
+export default function AuthPage() {
+  return (
+    <div className="p-6">
+      <SignIn />
+    </div>
+  );
+}
+```
+
+4. Handle the callback
+   - Supabase's client-side OAuth will handle redirect and session in the browser if your project is configured correctly.
+   - On successful signin the `supabase.auth` client will persist the session to localStorage by default (see `src/integrations/supabase/client.ts`).
+
+5. (Optional) Server-side session handling
+   - If you need server-side session verification, use Supabase's server-side libraries or verify the session token with your server using Supabase admin keys. Keep service_role keys strictly server-side.
+
+Security note: the publishable key is safe for client-side usage. Never expose service_role keys in client bundles.
 
 ## Contributing
 - Open issues or PRs for bugs or improvements.

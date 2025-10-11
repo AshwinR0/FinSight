@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Expenses from "./pages/Expenses";
+import SignIn from "./components/SignIn";
 import Lending from "./pages/Lending";
 import BorrowerDetail from "./pages/BorrowerDetail";
 import Settings from "./pages/Settings";
@@ -28,8 +29,9 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/expenses" replace />} />
-            <Route path="/expenses" element={<Layout><Expenses /></Layout>} />
+            <Route path="/" element={<SignIn />} />
+            <Route path="/home" element={<Layout><Expenses /></Layout>} />
+            <Route path="/expenses" element={<Navigate to="/home" replace />} />
             <Route path="/lending" element={<Layout><Lending /></Layout>} />
             <Route path="/lending/:id" element={<Layout><BorrowerDetail /></Layout>} />
             <Route path="/settings" element={<Layout><Settings /></Layout>} />
