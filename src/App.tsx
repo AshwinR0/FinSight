@@ -27,16 +27,14 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Navigate to="/expenses" replace />} />
-              <Route path="/expenses" element={<Expenses />} />
-              <Route path="/lending" element={<Lending />} />
-              <Route path="/lending/:id" element={<BorrowerDetail />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
+          <Routes>
+            <Route path="/" element={<Navigate to="/expenses" replace />} />
+            <Route path="/expenses" element={<Layout><Expenses /></Layout>} />
+            <Route path="/lending" element={<Layout><Lending /></Layout>} />
+            <Route path="/lending/:id" element={<Layout><BorrowerDetail /></Layout>} />
+            <Route path="/settings" element={<Layout><Settings /></Layout>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
