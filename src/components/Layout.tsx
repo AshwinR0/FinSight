@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Wallet, DollarSign, Settings, Moon, Sun } from 'lucide-react';
+import { Wallet, Settings, Moon, Sun, IndianRupee } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useThemeStore } from '@/store/useThemeStore';
 import { cn } from '@/lib/utils';
@@ -15,18 +15,21 @@ export const Layout = ({ children }: LayoutProps) => {
 
   const navItems = [
     { icon: Wallet, label: 'Expenses', path: '/expenses' },
-    { icon: DollarSign, label: 'Lending', path: '/lending' },
+    { icon: IndianRupee, label: 'Lending', path: '/lending' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
   return (
     <div className="min-h-screen flex flex-col pb-20 md:pb-0">
-      {/* Header */}
       <header className="sticky top-0 z-40 bg-card border-b border-border backdrop-blur-sm bg-opacity-90">
+        {/* Header */}
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <h1 className="text-xl md:text-2xl font-bold gradient-primary bg-clip-text text-transparent">
-            MoneyWise
-          </h1>
+          <div className="flex items-center gap-3">
+            <img src="/android-chrome-512x512.png" alt="FinSight logo" className="h-8 w-8 rounded-md" />
+            <h1 className="text-xl md:text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              FinSight
+            </h1>
+          </div>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-accent transition-colors"
@@ -52,7 +55,7 @@ export const Layout = ({ children }: LayoutProps) => {
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
-            
+
             return (
               <Link
                 key={item.path}
@@ -62,7 +65,7 @@ export const Layout = ({ children }: LayoutProps) => {
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-x-4 top-0 h-1 bg-primary rounded-full"
+                    className="absolute top-[60px] inset-x-4 top-0 h-1 bg-primary rounded-full"
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -92,7 +95,7 @@ export const Layout = ({ children }: LayoutProps) => {
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
-            
+
             return (
               <Link
                 key={item.path}

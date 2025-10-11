@@ -114,6 +114,10 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-poppins antialiased;
   }
+
+  .gradient-primary {
+  background-image: linear-gradient(to right, #7971f1, #3b82f6); /* Example: from-indigo-400 to-blue-500 */
+}
 }
 
 @layer utilities {

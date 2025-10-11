@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -13,6 +14,10 @@ export default {
       },
     },
     extend: {
+      backgroundImage: {
+        // Define your custom gradient
+        'gradient-primary': 'linear-gradient(to right, #7971f1, #3b82f6)',
+      },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
       },
@@ -96,5 +101,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

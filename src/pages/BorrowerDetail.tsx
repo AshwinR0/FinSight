@@ -155,14 +155,14 @@ export default function BorrowerDetail() {
         <Card className="gradient-card border-0 shadow-lg">
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground font-medium">Total Borrowed</p>
-            <h3 className="text-2xl font-bold mt-1">${totalBorrowed.toFixed(2)}</h3>
+            <h3 className="text-2xl font-bold mt-1">₹{totalBorrowed.toFixed(2)}</h3>
           </CardContent>
         </Card>
 
         <Card className="gradient-card border-0 shadow-lg">
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground font-medium">Total Repaid</p>
-            <h3 className="text-2xl font-bold mt-1 text-success">${totalRepaid.toFixed(2)}</h3>
+            <h3 className="text-2xl font-bold mt-1 text-success">₹{totalRepaid.toFixed(2)}</h3>
           </CardContent>
         </Card>
 
@@ -170,7 +170,7 @@ export default function BorrowerDetail() {
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground font-medium">Outstanding</p>
             <h3 className={cn('text-2xl font-bold mt-1', outstanding > 0 ? 'text-warning' : 'text-success')}>
-              ${outstanding.toFixed(2)}
+              ₹{outstanding.toFixed(2)}
             </h3>
           </CardContent>
         </Card>
@@ -330,7 +330,7 @@ export default function BorrowerDetail() {
                         transaction.type === 'lend' ? 'text-warning' : 'text-success'
                       )}
                     >
-                      {transaction.type === 'lend' ? '-' : '+'}${transaction.amount.toFixed(2)}
+                      {transaction.type === 'lend' ? '-' : '+'}₹{transaction.amount.toFixed(2)}
                     </span>
                   </motion.div>
                 ))}

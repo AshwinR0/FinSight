@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, TrendingUp, Users, DollarSign } from 'lucide-react';
+import { Plus, TrendingUp, Users, IndianRupee } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLendingStore } from '@/store/useLendingStore';
 import { calculateTotalBorrowed, calculateTotalRepaid, calculateOutstandingBalance, calculateTrustScore, getTrustLevel } from '@/utils/borrowerUtils';
@@ -54,10 +54,10 @@ export default function Lending() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Total Lent</p>
-                <h3 className="text-2xl font-bold mt-1">${totalLent.toFixed(2)}</h3>
+                <h3 className="text-2xl font-bold mt-1">₹{totalLent.toFixed(2)}</h3>
               </div>
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-primary" />
+                <IndianRupee className="w-5 h-5 text-primary" />
               </div>
             </div>
           </CardContent>
@@ -68,7 +68,7 @@ export default function Lending() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Recovered</p>
-                <h3 className="text-2xl font-bold mt-1">${totalRecovered.toFixed(2)}</h3>
+                <h3 className="text-2xl font-bold mt-1">₹{totalRecovered.toFixed(2)}</h3>
               </div>
               <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-success" />
@@ -82,10 +82,10 @@ export default function Lending() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Outstanding</p>
-                <h3 className="text-2xl font-bold mt-1">${totalOutstanding.toFixed(2)}</h3>
+                <h3 className="text-2xl font-bold mt-1">₹{totalOutstanding.toFixed(2)}</h3>
               </div>
               <div className="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-warning" />
+                <IndianRupee className="w-5 h-5 text-warning" />
               </div>
             </div>
           </CardContent>
@@ -195,9 +195,9 @@ export default function Lending() {
                             </span>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
-                            <span>Borrowed: ${totalBorrowed.toFixed(2)}</span>
+                            <span>Borrowed: ₹{totalBorrowed.toFixed(2)}</span>
                             <span className={outstanding > 0 ? 'text-warning font-medium' : 'text-success'}>
-                              Outstanding: ${outstanding.toFixed(2)}
+                              Outstanding: ₹{outstanding.toFixed(2)}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">

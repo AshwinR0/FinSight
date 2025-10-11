@@ -79,7 +79,7 @@ export default function Expenses() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">This Month</p>
-                <h3 className="text-3xl font-bold mt-1">${totalThisMonth.toFixed(2)}</h3>
+                <h3 className="text-3xl font-bold mt-1">₹{totalThisMonth.toFixed(2)}</h3>
               </div>
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-primary" />
@@ -108,7 +108,7 @@ export default function Expenses() {
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Avg/Day</p>
                 <h3 className="text-3xl font-bold mt-1">
-                  ${monthExpenses.length ? (totalThisMonth / monthExpenses.length).toFixed(2) : '0.00'}
+                  ₹{monthExpenses.length ? (totalThisMonth / monthExpenses.length).toFixed(2) : '0.00'}
                 </h3>
               </div>
               <div className="w-12 h-12 rounded-full bg-primary-light/20 flex items-center justify-center">
@@ -251,7 +251,7 @@ export default function Expenses() {
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-xl font-bold">${expense.amount.toFixed(2)}</span>
+                        <span className="text-xl font-bold">₹{expense.amount.toFixed(2)}</span>
                         <Button
                           variant="ghost"
                           size="icon"
