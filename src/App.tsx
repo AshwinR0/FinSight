@@ -10,6 +10,8 @@ import SignIn from "./components/SignIn";
 import Lending from "./pages/Lending";
 import BorrowerDetail from "./pages/BorrowerDetail";
 import Settings from "./pages/Settings";
+import Investments from "./pages/Investments";
+import Insights from "./pages/Insights";
 import NotFound from "./pages/NotFound";
 import { useThemeStore } from "./store/useThemeStore";
 
@@ -34,6 +36,8 @@ const App = () => {
             <Route path="/expenses" element={<Navigate to="/home" replace />} />
             <Route path="/lending" element={<Layout><Lending /></Layout>} />
             <Route path="/lending/:id" element={<Layout><BorrowerDetail /></Layout>} />
+            <Route path="/investments" element={<Layout><Investments /></Layout>} />
+            <Route path="/insights" element={<Layout><Insights /></Layout>} />
             <Route path="/settings" element={<Layout><Settings /></Layout>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

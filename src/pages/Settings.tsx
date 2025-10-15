@@ -46,14 +46,14 @@ export default function Settings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Info className="w-5 h-5" />
-            About MoneyWise
+            About FinSight
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
             <h3 className="font-semibold mb-2">Track Expenses & Lending</h3>
             <p className="text-sm text-muted-foreground">
-              MoneyWise helps you manage your personal finances by tracking expenses and monitoring
+              FinSight helps you manage your personal finances by tracking expenses and monitoring
               money lent to others with smart borrower analytics.
             </p>
           </div>

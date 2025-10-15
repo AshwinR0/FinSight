@@ -1,11 +1,12 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Wallet, Settings, Moon, Sun, IndianRupee } from 'lucide-react';
+import { Wallet, Settings, Moon, Sun, IndianRupee, TrendingUp, BarChart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useThemeStore } from '@/store/useThemeStore';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import Avatar from '@/components/Avatar';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -31,6 +32,8 @@ export const Layout = ({ children }: LayoutProps) => {
   const navItems = [
     { icon: Wallet, label: 'Expenses', path: '/home' },
     { icon: IndianRupee, label: 'Lending', path: '/lending' },
+    { icon: TrendingUp, label: 'Investments', path: '/investments' },
+    { icon: BarChart, label: 'Insights', path: '/insights' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
@@ -154,7 +157,7 @@ export const Layout = ({ children }: LayoutProps) => {
                           const avatar = meta?.user_metadata?.avatar_url ?? ((user as unknown) as { avatar_url?: string })?.avatar_url;
                           const email = ((user as unknown) as { email?: string })?.email;
                           if (avatar) {
-                            return <img src={avatar} alt={email || 'avatar'} className="h-8 w-8 rounded-full" />;
+                            return <Avatar src={avatar} alt={email || 'avatar'} className="h-8 w-8 rounded-full object-cover" />;
                           }
                           const initials = email ? email.charAt(0).toUpperCase() : 'U';
                           return (
