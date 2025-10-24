@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -40,15 +41,19 @@ export const LandingPage = () => {
         />
       </div>
       <div className="absolute bottom-14 p-2 rounded-full bg-white flex gap-4 z-20">
-        <button
-          className="bg-[#6E50E9] text-white font-extrabold p-2 px-3 rounded-full"
+        <Button
+          className="bg-[#6E50E9] text-white font-extrabold rounded-full text-lg hover:bg-[#5e39f0]"
           onClick={handleSignin}
+          size="lg"
         >
           Get Started
-        </button>
-        <button className="bg-[#F5C542] text-white font-extrabold p-2 px-3 rounded-full">
+        </Button>
+        <Button
+          className="bg-[#F5C542] text-white font-extrabold rounded-full text-lg hover:bg-[#f4bf2e]"
+          size="lg"
+        >
           Install App
-        </button>
+        </Button>
       </div>
     </div>
   );
