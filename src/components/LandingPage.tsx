@@ -1,10 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  const handleSignin = () => {
-    navigate("/signin");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    // Check existing session on mount
+    (async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (mounted && session) navigate("/home");
+    })();
+
+    // Subscribe to auth changes and navigate on sign-in
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        navigate("/home");
+      }
+    });
+
+    return () => {
+      mounted = false;
+      // unsubscribe if present
+      data?.subscription?.unsubscribe?.();
+    };
+  }, [navigate]);
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin + "/home" },
+    });
+    if (error) {
+      console.error("Google sign-in error", error.message);
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#6E50E9] relative overflow-hidden">
@@ -43,10 +82,33 @@ export const LandingPage = () => {
       <div className="absolute bottom-14 p-2 rounded-full bg-white flex gap-4 z-20">
         <Button
           className="bg-[#6E50E9] text-white font-extrabold rounded-full text-lg hover:bg-[#5e39f0]"
-          onClick={handleSignin}
+          onClick={handleGoogleSignIn}
+          disabled={loading}
+          aria-busy={loading}
           size="lg"
         >
           Get Started
+          {loading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-current"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              />
+            </svg>
+          ) : null}
         </Button>
         <Button
           className="bg-[#F5C542] text-white font-extrabold rounded-full text-lg hover:bg-[#f4bf2e]"
