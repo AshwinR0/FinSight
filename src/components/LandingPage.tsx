@@ -4,6 +4,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+type BeforeInstallPromptEvent = Event & {
+  readonly platforms: Array<string>;
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt: () => Promise<void>;
+};
+
+let deferredPrompt: BeforeInstallPromptEvent | null = null;
+
 export const LandingPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -45,6 +56,65 @@ export const LandingPage = () => {
       setLoading(false);
     }
   };
+
+  const [showInstallButton, setShowInstallButton] = useState(false);
+
+  useEffect(() => {
+    // 1. Listen for the beforeinstallprompt event
+    const handler = (e) => {
+      // Prevent the default browser prompt (the small banner/icon)
+      e.preventDefault();
+
+      // Store the event so it can be triggered later
+      deferredPrompt = e;
+
+      // Show your custom button
+      setShowInstallButton(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    // 2. Listen for the appinstalled event (optional but good practice)
+    const installedHandler = () => {
+      console.log("PWA was successfully installed.");
+      setShowInstallButton(false); // Hide the button after installation
+    };
+
+    window.addEventListener("appinstalled", installedHandler);
+
+    return () => {
+      // Clean up event listeners on component unmount
+      window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("appinstalled", installedHandler);
+    };
+  }, []); // Run only on initial mount
+
+  const handleInstallClick = async (e) => {
+    console.log("start");
+
+    e.preventDefault();
+    if (!deferredPrompt) {
+      console.log("Install prompt not available.");
+      return;
+    }
+
+    console.log("Showing install prompt...");
+    // 3. Show the native browser install prompt
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+    // Check user choice
+    console.log(`Install prompt outcome: ${outcome}`);
+
+    // The deferredPrompt can only be used once
+    deferredPrompt = null;
+    setShowInstallButton(false);
+  };
+
+  // Only render the button if the PWA is installable and not already installed
+  if (!showInstallButton) {
+    return null;
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#6E50E9] relative overflow-hidden">
       <h1 className="absolute top-[10%] lg:top-[2%] md:top-[2%] transform text-[5.5rem] md:text-[12rem] lg:text-[15rem] font-bold text-white">
@@ -52,7 +122,7 @@ export const LandingPage = () => {
       </h1>
       <div className="relative flex items-center justify-center mt-[0rem] md:mt-40 lg:mt-40 overflow-hidden">
         <img
-          src="/finsight_lending.svg"
+          src="/finsight_lending.webp"
           alt="FinSight Lending Iphone"
           className="w-[80vw] md:min-w-[550px] max-w-[900px]
             relative
@@ -65,7 +135,7 @@ export const LandingPage = () => {
             transition-all"
         />
         <img
-          src="/finsight_dashboard.svg"
+          src="/finsight_dashboard.webp"
           alt="FinSight Dashboard Iphone"
           className="w-[75vw] md:min-w-[550px] max-w-[800px]
             relative
@@ -110,12 +180,15 @@ export const LandingPage = () => {
             </svg>
           ) : null}
         </Button>
-        <Button
-          className="bg-[#F5C542] text-white font-extrabold rounded-full text-lg hover:bg-[#f4bf2e]"
-          size="lg"
-        >
-          Install App
-        </Button>
+        {showInstallButton && (
+          <Button
+            className="bg-[#F5C542] text-white font-extrabold rounded-full text-lg hover:bg-[#f4bf2e]"
+            size="lg"
+            onClick={handleInstallClick}
+          >
+            Install App
+          </Button>
+        )}
       </div>
     </div>
   );

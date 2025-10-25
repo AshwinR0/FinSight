@@ -6,6 +6,52 @@
 All colors MUST be HSL.
 */
 
+/* 300 - Light */
+@font-face {
+  font-family: "Poppins";
+  /* **Path is relative to the domain root, NOT the CSS file** */
+  src: url("/fonts/poppins/Poppins-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 400 - Regular */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 500 - Medium */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 600 - SemiBold */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 700 - Bold */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -44,16 +90,26 @@ All colors MUST be HSL.
     --ring: 244 100% 69%;
 
     --radius: 1rem;
-    
+
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(244 100% 69%), hsl(244 100% 55%));
-    --gradient-secondary: linear-gradient(135deg, hsl(173 68% 51%), hsl(173 68% 40%));
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(244 100% 69%),
+      hsl(244 100% 55%)
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(173 68% 51%),
+      hsl(173 68% 40%)
+    );
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(244 10% 98%));
-    
+
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(244 100% 69% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(244 100% 69% / 0.1), 0 2px 4px -2px hsl(244 100% 69% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(244 100% 69% / 0.15), 0 4px 6px -4px hsl(244 100% 69% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(244 100% 69% / 0.1),
+      0 2px 4px -2px hsl(244 100% 69% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(244 100% 69% / 0.15),
+      0 4px 6px -4px hsl(244 100% 69% / 0.1);
     --shadow-glow: 0 0 20px hsl(244 100% 69% / 0.3);
   }
 
@@ -92,16 +148,30 @@ All colors MUST be HSL.
     --border: 244 20% 20%;
     --input: 244 20% 20%;
     --ring: 244 100% 69%;
-    
+
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(244 100% 69%), hsl(244 100% 55%));
-    --gradient-secondary: linear-gradient(135deg, hsl(173 68% 51%), hsl(173 68% 40%));
-    --gradient-card: linear-gradient(145deg, hsl(244 25% 12%), hsl(244 20% 15%));
-    
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(244 100% 69%),
+      hsl(244 100% 55%)
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(173 68% 51%),
+      hsl(173 68% 40%)
+    );
+    --gradient-card: linear-gradient(
+      145deg,
+      hsl(244 25% 12%),
+      hsl(244 20% 15%)
+    );
+
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(244 100% 10% / 0.5);
-    --shadow-md: 0 4px 6px -1px hsl(244 100% 10% / 0.6), 0 2px 4px -2px hsl(244 100% 10% / 0.5);
-    --shadow-lg: 0 10px 15px -3px hsl(244 100% 10% / 0.7), 0 4px 6px -4px hsl(244 100% 10% / 0.6);
+    --shadow-md: 0 4px 6px -1px hsl(244 100% 10% / 0.6),
+      0 2px 4px -2px hsl(244 100% 10% / 0.5);
+    --shadow-lg: 0 10px 15px -3px hsl(244 100% 10% / 0.7),
+      0 4px 6px -4px hsl(244 100% 10% / 0.6);
     --shadow-glow: 0 0 20px hsl(244 100% 69% / 0.4);
   }
 }
@@ -116,23 +186,27 @@ All colors MUST be HSL.
   }
 
   .gradient-primary {
-  background-image: linear-gradient(to right, #7971f1, #3b82f6); /* Example: from-indigo-400 to-blue-500 */
-}
+    background-image: linear-gradient(
+      to right,
+      #7971f1,
+      #3b82f6
+    ); /* Example: from-indigo-400 to-blue-500 */
+  }
 }
 
 @layer utilities {
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-secondary {
     background: var(--gradient-secondary);
   }
-  
+
   .gradient-card {
     background: var(--gradient-card);
   }
-  
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
