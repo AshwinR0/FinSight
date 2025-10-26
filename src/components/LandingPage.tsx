@@ -111,20 +111,16 @@ export const LandingPage = () => {
     setShowInstallButton(false);
   };
 
-  // Only render the button if the PWA is installable and not already installed
-  if (!showInstallButton) {
-    return null;
-  }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#6E50E9] relative overflow-hidden">
+    <div className="max-h-screen min-h-screen flex items-center justify-center bg-[#6E50E9] relative overflow-hidden">
       <h1 className="absolute top-[10%] lg:top-[2%] md:top-[2%] transform text-[5.5rem] md:text-[12rem] lg:text-[15rem] font-bold text-white">
         FinSight
       </h1>
-      <div className="relative flex items-center justify-center mt-[0rem] md:mt-40 lg:mt-40 overflow-hidden">
+      <div className="relative flex items-center justify-center mt-[0rem] md:mt-40 lg:mt-40 overflow-clip">
         <img
           src="/finsight_lending.webp"
           alt="FinSight Lending Iphone"
-          className="w-[80vw] md:min-w-[550px] max-w-[900px]
+          className="w-[80vw] md:min-w-[550px] max-w-[800px]
             relative
             z-0
             translate-x-[25%]
@@ -137,7 +133,7 @@ export const LandingPage = () => {
         <img
           src="/finsight_dashboard.webp"
           alt="FinSight Dashboard Iphone"
-          className="w-[75vw] md:min-w-[550px] max-w-[800px]
+          className="w-[75vw] md:min-w-[550px] max-w-[700px]
             relative
             z-10
             -translate-x-[33%]
