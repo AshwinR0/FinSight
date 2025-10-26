@@ -76,7 +76,6 @@ export const LandingPage = () => {
 
     // 2. Listen for the appinstalled event (optional but good practice)
     const installedHandler = () => {
-      console.log("PWA was successfully installed.");
       setShowInstallButton(false); // Hide the button after installation
     };
 
@@ -90,21 +89,13 @@ export const LandingPage = () => {
   }, []); // Run only on initial mount
 
   const handleInstallClick = async (e) => {
-    console.log("start");
-
     e.preventDefault();
     if (!deferredPrompt) {
-      console.log("Install prompt not available.");
       return;
     }
 
-    console.log("Showing install prompt...");
     // 3. Show the native browser install prompt
     deferredPrompt.prompt();
-
-    const { outcome } = await deferredPrompt.userChoice;
-    // Check user choice
-    console.log(`Install prompt outcome: ${outcome}`);
 
     // The deferredPrompt can only be used once
     deferredPrompt = null;
@@ -145,7 +136,7 @@ export const LandingPage = () => {
             transition-all"
         />
       </div>
-      <div className="absolute bottom-14 p-2 rounded-full bg-white flex gap-4 z-20">
+      <div className="absolute bottom-24 md:bottom-14 lg:bottom-14 p-2 rounded-full bg-white flex gap-4 z-20">
         <Button
           className="bg-[#6E50E9] text-white font-extrabold rounded-full text-lg hover:bg-[#5e39f0]"
           onClick={handleGoogleSignIn}
